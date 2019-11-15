@@ -48,10 +48,17 @@
     }
 
     function render(element, container) {
-      console.log(element);
-      const node = createNode(element);
-      console.log(node);
-      container.appendChild(node);
+      let node = element.type == 'TEXT_ELEMENT'
+	  ? document.createTextNode(element.props.nodeValue)
+	  : document.createElement(element.type);
+      
+      Object.keys(element.props)
+	.filter(propName => propName != 'children')
+	.forEach(propName => node[propName] = element.props[propName]);
+      
+      for (let child of element.props.children)
+	render(child, node)
+      container.append(node);
     }
 
     const Didact = { createElement, render };
@@ -59,7 +66,19 @@
 
   <script type="text/babel">
     /** @jsx Didact.createElement */
-    let element = <p style="color: green">this is a test</p>;
+    let element = <table border="1px">
+	<thead>
+	<tr>
+	<td>ID</td>
+	<td>Name</td>
+	</tr>
+  </thead>
+  <tbody>
+  <tr><td>1</td><td>Mark Twain</td></tr>
+  <tr><td>2</td><td>John Snow</td></tr>
+  <tr><td>3</td><td>Harry Potter</td></tr>
+  </tbody>
+	</table>
     Didact.render(element, document.getElementById("root"));
   </script>
 </html>
