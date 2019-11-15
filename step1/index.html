@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charSet="utf-8"/>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script>
+    function createTextElement(text){
+      return {
+	type: "TEXT_ELEMENT",
+	props: {
+	  nodeValue: text,
+	  children: []
+	}
+      }
+    }
+    
+    function createElement(type, props, ...children){
+      return {
+	type: type,
+	props: {
+	  ...props,
+	  children: children.map(child => typeof child == 'object'
+				 ? child
+				 : createTextElement(child))
+	}
+      }
+    }
+
+    function createNode(element){
+      if (element.type == "TEXT_ELEMENT") {
+	return document.createTextNode(element.props.nodeValue);
+      }
+      
+      const node = document.createElement(element.type);
+      for (let propName in element.props){
+	if (propName == 'children') {
+	  for (let child of element.props.children)
+	    node.appendChild(createNode(child))
+	} else {
+	  node[propName] = element.props[propName];
+	}
+      }
+      return node;
+    }
+
+    function render(element, container) {
+      console.log(element);
+      const node = createNode(element);
+      console.log(node);
+      container.appendChild(node);
+    }
+
+    const Didact = { createElement, render };
+  </script>
+
+  <script type="text/babel">
+    /** @jsx Didact.createElement */
+    let element = <p style="color: green">this is a test</p>;
+    Didact.render(element, document.getElementById("root"));
+  </script>
+</html>
