@@ -5,7 +5,7 @@ Toto
 - [x] Step 1: `createElement`
 - [x] Step 2: `render`
 - [x] Step 3: Concurrent mode
-- [ ] Step 4: Fiber
+- [x] Step 4: Fiber
 - [ ] Step 5: Render and Commit Phases
 - [ ] Step 6: Reconciliation
 - [ ] Step 7: Function Components
