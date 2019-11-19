@@ -6,7 +6,7 @@ Toto
 - [x] Step 2: `render`
 - [x] Step 3: Concurrent mode
 - [x] Step 4: Fiber
-- [ ] Step 5: Render and Commit Phases
+- [x] Step 5: Render and Commit Phases
 - [ ] Step 6: Reconciliation
 - [ ] Step 7: Function Components
 - [ ] Step 8: Hooks
