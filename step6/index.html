@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charSet="utf-8"/>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./didact.js" type="text/javascript"></script>
+
+  <script type="text/babel">
+    /** @jsx Didact.createElement */
+    let element = <table border="1px">
+	<thead>
+	<tr>
+	<td>ID</td>
+	<td>Name</td>
+	</tr>
+  </thead>
+  <tbody>
+  <tr><td>1</td><td>Mark Twain</td></tr>
+  <tr><td>2</td><td>John Snow</td></tr>
+  <tr><td>3</td><td>Harry Potter</td></tr>
+  </tbody>
+	</table>
+    Didact.render(element, document.getElementById("root"));
+  </script>
+</html>
